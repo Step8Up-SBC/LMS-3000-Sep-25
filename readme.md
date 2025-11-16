@@ -17,7 +17,7 @@ Follow these steps to install and set up LMS3000 locally:
 ### 1. Clone the Repository
 
 ```sh
-git clone https://github.com/Step8Up-SBC/lms-3000.git
+git clone https://github.com/Step8Up-SBC/LMS-3000-Sep-25.git
 cd LMS3000
 ```
 
