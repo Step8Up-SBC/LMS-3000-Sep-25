@@ -1,26 +1,25 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-
-import { useSession } from '../contexts/SessionContext';
-
-const Header = () => {
-  const navigate = useNavigate();
-  const token = localStorage.getItem('authToken');
-
-  const { user } = useSession();
-
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    navigate('/login');
-  };
-
-
-  const wordCase = (word) => {  
+ import React from 'react';                                                                                                                                                                     
+  import { Link, useNavigate } from 'react-router-dom';                                                                                                                                          
+                                                                                                                                                                                                 
+  import { useSession } from '../contexts/SessionContext';                                                                                                                                       
+                                                                                                                                                                                                 
+  const Header = () => {                                                                                                                                                                         
+    const navigate = useNavigate();                                                                                                                                                              
+    const token = localStorage.getItem('authToken');                                                                                                                                             
+                                                                                                                                                                                                 
+    const { user } = useSession();                                                                                                                                                               
+                                                                                                                                                                                                 
+    const handleLogout = () => {                                                                                                                                                                 
+      localStorage.removeItem('authToken');                                                                                                                                                      
+      navigate('/login');                                                                                                                                                                        
+    };                                                                                                                                                                                           
+                                                                                                                                                                                                 
+  const wordCase = (word) => {
     if (word === undefined) {
       return '';
     }
     return word.charAt(0).toUpperCase() + word.slice(1);
-  }
+  };
 
   return (
     <header>
@@ -29,7 +28,12 @@ const Header = () => {
         <Link to="/">All Courses</Link>
         {token ? (
           <>
-            <Link to="/profile">{wordCase(user.username)}'s Courses</Link>
+            <Link to="/profile" className="avatar-circle">
+
+                {user && user.username
+                  ? user.username.trim()[0].toUpperCase()
+                  : ''}
+            </Link>
             <button onClick={handleLogout}>Logout</button>
           </>
         ) : (
