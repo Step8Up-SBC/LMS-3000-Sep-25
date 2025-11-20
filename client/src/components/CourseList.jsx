@@ -5,6 +5,7 @@ import CourseCard from './CourseCard';
 
 const CourseList = () => {
   const [courses, setCourses] = useState([]);
+  const [sorted, setSorted] = useState(false);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -22,9 +23,23 @@ const CourseList = () => {
     fetchCourses();
   }, []);
 
+  const sortCourses = () => {
+    if(!sorted) {
+      const sortedList = courses.sort((a, b) => a.title.localeCompare(b.title));
+      setCourses(sortedList);
+      setSorted(true);
+    }
+    else {
+      const reversedList = courses.reverse();
+      setCourses(reversedList);
+      setSorted(false);
+    }
+  }
+
   return (
     <div>
       <h2>All Courses</h2>
+      <button onClick={sortCourses}>Sort Courses</button>
       <div className="course-list">
         {courses.map((course) => (
           <CourseCard key={course.id} course={course} />
